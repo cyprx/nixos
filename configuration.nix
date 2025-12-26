@@ -11,7 +11,27 @@
       ./nvidia.nix
     ];
 
-  nixpkgs.config.allowUnfree = true;
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+    memoryPercent = 50;
+    priority = 100;   
+  };
+
+  swapDevices = [
+    {
+      device = "/var/lib/swapfile";
+      size = 16 * 1024;
+      priority = 0;
+    }
+  ];
+
+  nixpkgs.config = {
+    allowUnfree = true;
+    permittedInsecurePackages = [
+      "beekeeper-studio-5.3.4"
+    ];
+  };
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -23,7 +43,13 @@
   networking.hostName = "cynixos"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager = {
+    enable = true;
+    insertNameservers = [
+      "1.1.1.1" "1.0.0.1"
+      "8.8.8.8" "8.8.4.4"
+    ];
+  }; 
 
   # Bluetooth
   hardware.bluetooth.enable = true;
@@ -43,6 +69,11 @@
   #   keyMap = "us";
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
+  fonts.packages = with pkgs; [
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
+  ];
 
   nix = {
     package = pkgs.nix;
@@ -70,6 +101,7 @@
   # OR
   services.pipewire = {
     enable = true;
+    alsa.enable = true;
     pulse.enable = true;
   };
 
