@@ -3,6 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
+    nix-darwin.url = "github:LnL7/nix-darwin";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,7 +19,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, niri, helix, darkvoid-theme, ...}@inputs: {
+  outputs = { self, nixpkgs, nix-darwin, home-manager, niri, helix, darkvoid-theme, ...}@inputs: {
     nixosConfigurations = {
       cynixos = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -36,6 +40,24 @@
             home-manager.backupFileExtension = "bk";
             home-manager.extraSpecialArgs = { inherit inputs; };
             home-manager.users.cyprx = import ./home.nix;
+          }
+        ];
+      };
+    };
+
+    darwinConfigurations = {
+      cymacos = nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/mac
+          home-manager.darwinModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "bk";
+            home-manager.extraSpecialArgs = { inherit inputs; };
+            home-manager.users.cyprx = import ./home/darwin.nix;
           }
         ];
       };
