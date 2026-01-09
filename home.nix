@@ -33,6 +33,7 @@
     playerctl
     gemini-cli
     wtfutil
+    claude-code
 
     # apps
     slack
@@ -351,7 +352,7 @@
     enable = true;
     defaultEditor = true;
     settings = {
-      theme = "darkvoid";
+      theme = "grass";
       editor = {
         line-number = "absolute";
         cursorline = true;
@@ -362,6 +363,10 @@
           select = "underline";
         };
         lsp.display-messages = true;
+      };
+
+      keys.normal = {
+        space.g = ":sh lazygit";
       };
     };
 
@@ -387,6 +392,7 @@
     };
   };
   xdg.configFile."helix/themes/darkvoid.toml".source = "${inputs.darkvoid-theme}/darkvoid.toml";
+  xdg.configFile."helix/themes/grass.toml".source = "${inputs.grass-theme}/grass.toml";
 
   programs.neovim = {
     enable = true;
@@ -655,5 +661,9 @@
       { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; } # uBlock Origin (Brave shields are good, this is better)
     ];
   };
+
+  programs.yazi.enable = true;
+
+  programs.lazygit.enable = true;
 
 }

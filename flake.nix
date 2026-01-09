@@ -17,9 +17,13 @@
       url = "github:cyprx/darkvoid-helix";
       flake = false;
     };
+    grass-theme = {
+      url = "github:cyprx/grass-helix";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, nix-darwin, home-manager, niri, helix, darkvoid-theme, ...}@inputs: {
+  outputs = { self, nixpkgs, nix-darwin, home-manager, niri, helix, darkvoid-theme, grass-theme, ...}@inputs: {
     nixosConfigurations = {
       cynixos = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -30,7 +34,13 @@
           {
             nixpkgs.overlays = [
               niri.overlays.niri
+              (final: prev: {
+                  niri = prev.niri.overrideAttrs (old: {
+                  doCheck = false;
+                });
+              })
               (import ./overlays/slack.nix)
+              (import ./overlays/claude.nix)
             ];
           }
 
