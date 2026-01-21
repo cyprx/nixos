@@ -7,6 +7,8 @@
     inputs.niri.homeModules.niri
   ];
 
+  nix.registry.node-dev.flake = inputs.self;
+
   home.packages = with pkgs; [
     xwayland-satellite
     neofetch
@@ -38,10 +40,11 @@
     # apps
     slack
     telegram-desktop
-    bruno
     zoom-us
     dbeaver-bin
     anydesk
+    bruno
+    discord
 
     # games
     lutris
@@ -235,6 +238,9 @@
   };
   programs.fish = {
     enable = true;
+    interactiveShellInit = ''
+      set -g fish_color_autosuggestion brblack
+    '';
     shellAliases = {
       gs = "git status";
       gd = "git diff";

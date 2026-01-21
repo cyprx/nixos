@@ -19,11 +19,11 @@
     "grass-theme": {
       "flake": false,
       "locked": {
-        "lastModified": 1767928402,
-        "narHash": "sha256-lN3jQ7tTkTU4WrtqZ5kEVSC/UwQR+DNnfZceHgsMiu8=",
+        "lastModified": 1767946179,
+        "narHash": "sha256-xwF1qAiOlg60QDtMMQlsw2nqrCS76+iJT/eXRwIptL4=",
         "owner": "cyprx",
         "repo": "grass-helix",
-        "rev": "6f19534fdb52d5edf7b22d53fea3923bb4de472f",
+        "rev": "d9f6b5177abb6aa6a4a48256416766bd64d47499",
         "type": "github"
       },
       "original": {

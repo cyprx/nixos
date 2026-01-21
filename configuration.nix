@@ -111,6 +111,9 @@
     dns = [ "8.8.8.8" "1.1.1.1" ];
   };
 
+  # Waydroid
+  virtualisation.waydroid.enable = true;
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 

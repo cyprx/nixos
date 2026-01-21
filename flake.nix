@@ -23,7 +23,11 @@
     };
   };
 
-  outputs = { self, nixpkgs, nix-darwin, home-manager, niri, helix, darkvoid-theme, grass-theme, ...}@inputs: {
+  outputs = { self, nixpkgs, nix-darwin, home-manager, niri, helix, darkvoid-theme, grass-theme, ...}@inputs:
+  let
+          forAllSystems = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-darwin" ];
+  in
+  {
     nixosConfigurations = {
       cynixos = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -72,5 +76,25 @@
         ];
       };
     };
+
+    devShells = forAllSystems (system: {
+        node-dev = let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in pkgs.mkShell {
+          buildInputs = with pkgs; [
+            nodejs_22
+            nodePackages.npm
+            nodePackages.pnpm
+            nodePackages.typescript-language-server
+          ];
+
+          shellHook = ''
+            export NPM_CONFIG_USERCONFIG="$PWD/.npmrc"
+            echo "Node.js $(node --version)"
+            echo "npm $(npm --version)"
+            echo "pnpm $(pnpm --version)"
+          '';
+        };
+    });
   };
 }
