@@ -45,6 +45,7 @@
     anydesk
     bruno
     discord
+    obsidian
 
     # games
     lutris
