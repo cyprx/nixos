@@ -4,8 +4,12 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    # Nix-Darwin
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+
+    # Nix-WSL
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -72,6 +76,28 @@
             home-manager.backupFileExtension = "bk";
             home-manager.extraSpecialArgs = { inherit inputs; };
             home-manager.users.cyprx = import ./home/darwin.nix;
+          }
+        ];
+      };
+    };
+
+    nixWslConfigurations = {
+      cywsl = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/wsl
+          nixos-wsl.nixosModules.default
+          {
+            system.stateVersion = "25.05";
+            wsl.enable = true;
+          }
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.backupFileExtension = "bk";
+            home-manager.extraSpecialArgs = { inherit inputs; };
+            home-manager.users.cyprx = import ./home/wsl.nix;
           }
         ];
       };
