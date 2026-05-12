@@ -27,7 +27,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nix-darwin, home-manager, niri, helix, darkvoid-theme, grass-theme, ...}@inputs:
+  outputs = { self, nixpkgs, nix-darwin, nixos-wsl, home-manager, niri, helix, darkvoid-theme, grass-theme, ...}@inputs:
   let
           forAllSystems = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-darwin" ];
   in
@@ -81,7 +81,7 @@
       };
     };
 
-    nixWslConfigurations = {
+    nixosConfigurations = {
       cywsl = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [

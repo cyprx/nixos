@@ -9,6 +9,7 @@
   else "/home/cyprx";
 
   home.packages = with pkgs; [
+    opencode
   ];
 
   # Shell
