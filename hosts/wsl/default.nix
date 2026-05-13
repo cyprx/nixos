@@ -16,6 +16,7 @@
   wsl.wslConf = {
     interop.appendWindowsPath = false;
   };
+  wsl.ssh-agent.enable = true;
   networking.hostName = "cywsl";
 
   # This value determines the NixOS release from which the default
