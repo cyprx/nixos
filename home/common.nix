@@ -1,6 +1,9 @@
 { config, pkgs, inputs, ... }:
 
 {
+  imports = [
+    ./apps/nvim/nvim.nix
+  ];
   home.stateVersion = "25.05";
 
   home.homeDirectory = 
