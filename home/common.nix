@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./apps/nvim/nvim.nix
+    ../apps/nvim/nvim.nix
   ];
   home.stateVersion = "25.05";
 
@@ -13,11 +13,12 @@
 
   home.packages = with pkgs; [
     opencode
+    cmake
   ];
 
   # Shell
   home.sessionVariables = {
-    EDITOR = "hx";
+    EDITOR = "vi";
     BROWSER = "firefox";
     TERMINAL = "kitty";
     MOZ_USE_XINPUT2 = "1";
@@ -30,10 +31,7 @@
       se = "sudoedit";
       vim = "nvim";
 
-      xdd-vpn-start = "openvpn3 session-start --config /etc/nixos/secrets/xdd-vpn-profile.ovpn";
-      xdd-vpn-stop = "openvpn3 session-manage --disconnect --config /etc/nixos/secrets/xdd-vpn-profile.ovpn";
-
-      nix-re = "sudo nixos-rebuild switch --flake /etc/nixos/.#cynixos";
+      nix-re = "sudo nixos-rebuild switch --flake /etc/nixos/.";
     };
     functions = {
       fish_greeting = "";
@@ -86,7 +84,6 @@
     };
 
     settings = {
-      scrollback_pager = "${pkgs.moor}/bin/moor";
       term = "xterm-256color";
       "modify_font" = "cell_height 110%";
       scrollback_lines = 10000;
@@ -126,7 +123,6 @@
   # programs.helix.package = inputs.helix.packages.${pkgs.system}.default;
   programs.helix = {
     enable = true;
-    defaultEditor = true;
     settings = {
       theme = "darkvoid";
       editor = {
