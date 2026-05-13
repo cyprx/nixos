@@ -304,6 +304,11 @@
         };
       };
     };
+    config = {
+      safe = {
+      	directory = "/etc/nixos";
+      };
+    };
   };
   
   # Terminal

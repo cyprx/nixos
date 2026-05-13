@@ -67,6 +67,7 @@
           insteadOf = "https://github.com/";
         };
       };
+      safe.directory = ["/etc/nixos"];
     };
   };
   
