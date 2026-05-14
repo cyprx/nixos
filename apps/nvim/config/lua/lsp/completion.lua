@@ -16,8 +16,8 @@ Ice.plugins["blink-cmp"] = {
             keymap = {
                 preset = "none",
                 ["<Tab>"] = { "accept" },
-                ["<C-k>"] = { "select_prev", "fallback" },
-                ["<C-j>"] = { "select_next", "fallback" },
+                ["<C-n>"] = { "select_prev", "fallback" },
+                ["<C-p>"] = { "select_next", "fallback" },
             },
         },
         completion = {

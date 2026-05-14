@@ -7,6 +7,7 @@
     vimAlias = true;
 
     plugins = with pkgs.vimPlugins; [
+    	lazy-nvim
     ];
 
     # External packages needed for Neovim (LSPs, Formatters)
