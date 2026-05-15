@@ -19,6 +19,7 @@
   };
   wsl.ssh-agent.enable = true;
   networking.hostName = "cywsl";
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   services.dbus.enable = true;
   # This value determines the NixOS release from which the default
