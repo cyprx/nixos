@@ -14,14 +14,13 @@
   home.packages = with pkgs; [
     opencode
     cmake
+    zoxide
+    wget
   ];
 
   # Shell
   home.sessionVariables = {
     EDITOR = "vi";
-    BROWSER = "firefox";
-    TERMINAL = "kitty";
-    MOZ_USE_XINPUT2 = "1";
   };
   programs.fish = {
     enable = true;
@@ -39,6 +38,12 @@
     plugins = [
       { name = "fzf-fish"; src = pkgs.fishPlugins.fzf-fish.src; }
     ];
+  };
+
+  programs.zoxide = {
+    enable = true;
+    enableFishIntegration = true;
+    enableBashIntegration = true;
   };
 
   programs.direnv = {

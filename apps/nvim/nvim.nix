@@ -8,6 +8,8 @@
 
     plugins = with pkgs.vimPlugins; [
     	lazy-nvim
+        nvim-treesitter
+        nvim-treesitter.withAllGrammars
     ];
 
     # External packages needed for Neovim (LSPs, Formatters)
