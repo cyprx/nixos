@@ -21,6 +21,8 @@
   networking.hostName = "cywsl";
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+  virtualisation.docker.enable = true;
+
   services.dbus.enable = true;
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
