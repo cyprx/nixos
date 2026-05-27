@@ -39,7 +39,7 @@
         system = "x86_64-linux";
         specialArgs = { inherit inputs; user = identity.cynixos; };
         modules = [
-          ./configuration.nix
+          ./hosts/nixos
           # ./vpn.nix
           {
             nixpkgs.overlays = [
@@ -59,7 +59,7 @@
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "bk";
             home-manager.extraSpecialArgs = { inherit inputs; user = identity.cynixos; };
-            home-manager.users.${identity.cynixos.username} = import ./home.nix;
+            home-manager.users.${identity.cynixos.username} = import ./home/nixos.nix;
           }
         ];
       };
