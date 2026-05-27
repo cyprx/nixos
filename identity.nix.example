@@ -1,0 +1,16 @@
+{
+  # Per-host user identity. Copy this file to `identity.nix` and fill in
+  # your real usernames. `identity.nix` is gitignored.
+  cynixos = {
+    username = "youruser";
+    homeDirectory = "/home/youruser";
+  };
+  cymacos = {
+    username = "youruser";
+    homeDirectory = "/Users/youruser";
+  };
+  cywsl = {
+    username = "youruser";
+    homeDirectory = "/home/youruser";
+  };
+}

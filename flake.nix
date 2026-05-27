@@ -5,7 +5,8 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     # Nix-Darwin
-    nix-darwin.url = "github:LnL7/nix-darwin";
+    # Use `github:nix-darwin/nix-darwin/nix-darwin-25.11` to use Nixpkgs 25.11.
+    nix-darwin.url = "github:nix-darwin/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
     # Nix-WSL
@@ -30,12 +31,13 @@
   outputs = { self, nixpkgs, nix-darwin, nixos-wsl, home-manager, niri, helix, darkvoid-theme, grass-theme, ...}@inputs:
   let
           forAllSystems = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-darwin" ];
+          identity = import ./identity.nix;
   in
   {
     nixosConfigurations = {
       cynixos = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs; user = identity.cynixos; };
         modules = [
           ./configuration.nix
           # ./vpn.nix
@@ -56,8 +58,8 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "bk";
-            home-manager.extraSpecialArgs = { inherit inputs; };
-            home-manager.users.cyprx = import ./home.nix;
+            home-manager.extraSpecialArgs = { inherit inputs; user = identity.cynixos; };
+            home-manager.users.${identity.cynixos.username} = import ./home.nix;
           }
         ];
       };
@@ -66,7 +68,7 @@
     darwinConfigurations = {
       cymacos = nix-darwin.lib.darwinSystem {
         system = "aarch64-darwin";
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs; user = identity.cymacos; };
         modules = [
           ./hosts/mac
           home-manager.darwinModules.home-manager
@@ -74,8 +76,8 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "bk";
-            home-manager.extraSpecialArgs = { inherit inputs; };
-            home-manager.users.cyprx = import ./home/darwin.nix;
+            home-manager.extraSpecialArgs = { inherit inputs; user = identity.cymacos; };
+            home-manager.users.${identity.cymacos.username} = import ./home/darwin.nix;
           }
         ];
       };
@@ -84,6 +86,7 @@
     nixosConfigurations = {
       cywsl = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = { inherit inputs; user = identity.cywsl; };
         modules = [
           ./hosts/wsl
           nixos-wsl.nixosModules.default
@@ -96,8 +99,8 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.backupFileExtension = "bk";
-            home-manager.extraSpecialArgs = { inherit inputs; };
-            home-manager.users.cyprx = import ./home/wsl.nix;
+            home-manager.extraSpecialArgs = { inherit inputs; user = identity.cywsl; };
+            home-manager.users.${identity.cywsl.username} = import ./home/wsl.nix;
           }
         ];
       };

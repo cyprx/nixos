@@ -1,22 +1,22 @@
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, user, ... }:
 
 {
   imports = [
     ../apps/nvim/nvim.nix
   ];
   home.stateVersion = "25.05";
-
-  home.homeDirectory = 
-  if pkgs.stdenv.isDarwin 
-  then "/Users/cyprx" 
-  else "/home/cyprx";
+  home.username = user.username;
+  home.homeDirectory = user.homeDirectory;
 
   home.packages = with pkgs; [
     opencode
     cmake
     zoxide
     wget
+    nerd-fonts.caskaydia-cove
   ];
+
+  fonts.fontconfig.enable = true;
 
   # Shell
   home.sessionVariables = {
@@ -30,7 +30,10 @@
       se = "sudoedit";
       vim = "nvim";
 
-      nix-re = "sudo nixos-rebuild switch --flake /etc/nixos/.";
+      nix-re =
+        if pkgs.stdenv.isDarwin
+        then "sudo darwin-rebuild switch --flake ~/workplace/nix-darwin#cymacos"
+        else "sudo nixos-rebuild switch --flake /etc/nixos";
     };
     functions = {
       fish_greeting = "";
@@ -84,7 +87,7 @@
     themeFile = "Nord";
 
     font = {
-      name = "UbuntuMono Nerd Font";
+      name = "caskaydia-cove";
       size = 12;
     };
 
@@ -102,7 +105,7 @@
       hide_window_decorations = "yes";
       
       # Transparency (optional)
-      background_opacity = "0.95";
+      background_opacity = "0.99";
       background_blur = 1;
     };
 
@@ -165,80 +168,6 @@
     };
   };
   xdg.configFile."helix/themes/darkvoid.toml".source = "${inputs.darkvoid-theme}/darkvoid.toml";
-
-  programs.neovim = {
-    enable = true;
-    viAlias = true;
-    vimAlias = true;
-    plugins = with pkgs.vimPlugins; [
-      nvim-web-devicons
-      telescope-nvim
-      plenary-nvim
-      nvim-tree-lua
-      (nvim-treesitter.withAllGrammars)
-      nvim-lspconfig
-      nvim-cmp
-      cmp-nvim-lsp
-      luasnip
-      cmp_luasnip
-      nvim-jdtls
-    ];
-    
-    extraLuaConfig = ''
-      vim.g.loaded_netrw = 1
-      vim.g.loaded_netrwPlugin = 1
-      vim.opt.number = true
-      vim.opt.shiftwidth = 2
-      vim.opt.tabstop = 2
-      vim.opt.expandtab = true
-      vim.opt.smartindent = true
-      vim.opt.clipboard = "unnamedplus"
-      vim.opt.splitright = true
-      vim.g.mapleader = " "
-
-      -- TELESCOPE (Fuzzy Finder)
-      local builtin = require('telescope.builtin')
-      vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
-      vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
-      vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
-
-      -- FILE TREE (Nvim Tree)
-      require("nvim-tree").setup({})
-      vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', {})
-
-      -- TREESITTER (Syntax Highlighting)
-      require'nvim-treesitter.configs'.setup {
-        highlight = { enable = true },
-        indent = { enable = true },
-      }
-      
-      -- LSP SETUP (Language Servers)
-      vim.lsp.enable('nixd')
-      vim.lsp.enable('lua_ls')
-      vim.lsp.enable('jdtls')
-
-      -- AUTOCOMPLETE (nvim-cmp)
-      local cmp = require'cmp'
-      cmp.setup({
-        snippet = {
-          expand = function(args)
-            require('luasnip').lsp_expand(args.body)
-          end,
-        },
-        mapping = cmp.mapping.preset.insert({
-          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-          ['<C-f>'] = cmp.mapping.scroll_docs(4),
-          ['<C-Space>'] = cmp.mapping.complete(),
-          ['<C-e>'] = cmp.mapping.abort(),
-          ['<CR>'] = cmp.mapping.confirm({ select = true }),
-        }),
-        sources = cmp.config.sources({
-          { name = 'nvim_lsp' },
-          { name = 'luasnip' },
-        })
-      })
-    '';
-  };
 
   programs.gh = {
     enable = true;

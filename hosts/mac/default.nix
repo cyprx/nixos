@@ -1,12 +1,31 @@
-{ pkgs, ... }:
+{ pkgs, user, ... }:
 
 {
   nix.enable = false;
 
-  users.users.cyprx = {
-    name = "cyprx";
-    home = "/Users/cyprx"; # Use the absolute path
+  users.users.${user.username} = {
+    name = user.username;
+    home = user.homeDirectory;
   };
+
+  system.primaryUser = user.username;
+
+  homebrew = {
+    enable = true;
+    onActivation = {
+      autoUpdate = true;
+      cleanup = "zap"; # Removes unlisted casks/formulae
+    };
+    
+    # 2. Add Google Chrome
+    casks = [
+      "google-chrome"
+      "kitty"
+      "orbstack"
+      "obsidian"
+    ];
+  };
+
 
   system.stateVersion = 5;
 }
