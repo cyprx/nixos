@@ -75,5 +75,5 @@ overlays/              # package overlays (slack, claude, ...)
 ## Notes
 
 - `darwin-rebuild` requires `sudo` for activation in recent nix-darwin.
-- The mac hostname (`VNM-CYNGUYEN`) doesn't match the flake key, so `#cymacos` is passed explicitly.
+- If the mac hostname doesn't match the flake key, pass `#cymacos` explicitly.
 - Do not run `sudo git ...` inside this repo — it creates root-owned objects in `.git/`. If it happens: `sudo chown -R "$USER":staff .git`.
