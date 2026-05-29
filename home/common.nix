@@ -14,6 +14,9 @@
     zoxide
     wget
     nerd-fonts.caskaydia-cove
+    nerd-fonts.noto
+    tree-sitter
+    nodejs
   ];
 
   fonts.fontconfig.enable = true;
@@ -107,6 +110,14 @@
       # Transparency (optional)
       background_opacity = "0.99";
       background_blur = 1;
+
+      # Draw borders when multiple windows are split
+      draw_minimal_borders = "yes";
+      window_border_width = 1;
+
+      # Highlight colors for active/inactive windows
+      # active_border_color = "#00ff00";
+      # inactive_border_color = "#444444";
     };
 
     # Keybindings (optional)
@@ -123,8 +134,23 @@
     shellIntegration = {
       enableBashIntegration = true;
       enableZshIntegration = true;
+      enableFishIntegration = true;
     }; 
   };
+
+  programs.ghostty = {
+    enable = true;
+    # Set to null if using the Homebrew cask to avoid build errors
+    package = null; 
+    
+    settings = {
+        font-family = "Noto Nerd Font";
+        font-size = 14;
+        window-decoration = true;
+        confirm-close-surface = true;
+    };
+  };
+
   programs.jq.enable = true;
 
   # Editors

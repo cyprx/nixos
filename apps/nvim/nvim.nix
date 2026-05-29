@@ -3,7 +3,7 @@
 {
   programs.neovim = {
     enable = true;
-    viAlias = true;
+    viAlias = false;
     vimAlias = true;
 
     plugins = with pkgs.vimPlugins; [

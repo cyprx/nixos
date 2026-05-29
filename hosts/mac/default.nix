@@ -23,6 +23,9 @@
       "kitty"
       "orbstack"
       "obsidian"
+      "rectangle"
+      "telegram"
+      "ghostty"
     ];
   };
 
