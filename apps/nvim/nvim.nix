@@ -22,7 +22,7 @@
 
   # Link your existing Lua config folder to ~/.config/nvim
   xdg.configFile."nvim" = {
-    source = ./nvim0;
+    source = ./config;
     recursive = true;
   };
 }
