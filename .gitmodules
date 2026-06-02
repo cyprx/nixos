@@ -1,0 +1,3 @@
+[submodule "apps/nvim/nvim0"]
+	path = apps/nvim/nvim0
+	url = git@github.com:cyprx/nvim0.git
