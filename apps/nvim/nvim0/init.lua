@@ -1,4 +1,4 @@
-require("lua.editor")
-require("lua.keymap")
-require("lua.lazy")
-require("lua.lsp")
+require("editor")
+require("keymap")
+require("lazy-init")
+require("lsp")
