@@ -17,6 +17,10 @@
     nerd-fonts.noto
     tree-sitter
     nodejs
+    watch
+    grc
+    yazi
+    htop
   ];
 
   fonts.fontconfig.enable = true;
@@ -25,6 +29,17 @@
   home.sessionVariables = {
     EDITOR = "vi";
   };
+
+  programs.bash = {
+    initExtra = ''
+        # "check if parent process is not fish" && "make nested shells work properly"
+        if grep -qv fish /proc/$PPID/comm && [[ $SHLVL == [12] ]]; then
+            # set $SHELL for better integration with programs like nix shell, tmux, etc.
+            SHELL=${pkgs.fish}/bin/fish exec fish
+        fi
+    '';
+};
+
   programs.fish = {
     enable = true;
     shellAliases = {
@@ -43,6 +58,7 @@
     };
     plugins = [
       { name = "fzf-fish"; src = pkgs.fishPlugins.fzf-fish.src; }
+      { name = "grc"; src = pkgs.fishPlugins.grc.src; }
     ];
   };
 
@@ -144,9 +160,11 @@
     package = null; 
     
     settings = {
+        theme = "black-metal";
         font-family = "Noto Nerd Font";
         font-size = 14;
         window-decoration = true;
+        macos-titlebar-style = "tabs";
         confirm-close-surface = true;
     };
   };

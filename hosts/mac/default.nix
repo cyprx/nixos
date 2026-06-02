@@ -26,6 +26,8 @@
       "rectangle"
       "telegram"
       "ghostty"
+      "dbeaver-community"
+      "visual-studio-code"
     ];
   };
 
