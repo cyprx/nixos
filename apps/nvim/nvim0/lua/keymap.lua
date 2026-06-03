@@ -6,6 +6,12 @@ local keymap = vim.keymap.set
 
 -- General Keymaps
 -- keymap("n", "<leader>nh", ":nohlsearch<CR>", { desc = "Clear search highlights" })
+-- Send all project/buffer diagnostics to the quickfix list
+vim.keymap.set('n', '<leader>qd', vim.diagnostic.setqflist, { desc = "Toggle Diagnostic Quickfix" })
+
+-- Navigate quickly through the errors
+vim.keymap.set('n', '[c', '<cmd>cprev<cr>', { desc = "Previous Quickfix Item" })
+vim.keymap.set('n', ']c', '<cmd>cnext<cr>', { desc = "Next Quickfix Item" })
 
 -- Nvim Tree
 keymap("n", "<leader>n", ":NvimTreeToggle<CR>", { desc = "Toggle Nvim Tree" })
