@@ -15,6 +15,7 @@
     onActivation = {
       autoUpdate = true;
       cleanup = "zap"; # Removes unlisted casks/formulae
+      extraFlags = [ "--force" ]; 
     };
     
     # 2. Add Google Chrome

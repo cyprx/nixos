@@ -48,6 +48,9 @@
       se = "sudoedit";
       vim = "nvim";
 
+      # shells
+      dotnet-env="nix-shell ~/workplace/nix-darwin/shells/dotnet.nix";
+
       nix-re =
         if pkgs.stdenv.isDarwin
         then "sudo darwin-rebuild switch --flake ~/workplace/nix-darwin#cymacos"

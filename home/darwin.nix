@@ -4,7 +4,7 @@
 
   # Mac-only stuff
   home.packages = [
-
+    pkgs.dotnet-sdk_10
   ];
 
   programs.ghostty = {
