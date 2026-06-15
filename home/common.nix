@@ -21,6 +21,7 @@
     grc
     yazi
     htop
+    claude-code
   ];
 
   fonts.fontconfig.enable = true;

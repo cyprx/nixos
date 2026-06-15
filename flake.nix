@@ -71,6 +71,7 @@
         specialArgs = { inherit inputs; user = identity.cymacos; };
         modules = [
           ./hosts/mac
+          { nixpkgs.config.allowUnfree = true; }
           home-manager.darwinModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
