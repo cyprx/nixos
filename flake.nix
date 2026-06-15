@@ -124,6 +124,20 @@
             echo "pnpm $(pnpm --version)"
           '';
         };
+
+        dotnet-dev = let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in pkgs.mkShell {
+          buildInputs = with pkgs; [
+              dotnet-sdk_10
+              csharpier
+          ];
+
+          shellHook = ''
+            export DOTNET_CLI_TELEMETRY_OPTOUT=1
+            echo "🚀 Shared .NET Development Environment Loaded!"
+          '';
+        };
     });
   };
 }

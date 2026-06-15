@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, user, ... }:
 {
   imports = [ ./common.nix ];
 
@@ -6,6 +6,10 @@
   home.packages = [
     pkgs.dotnet-sdk_10
   ];
+
+  home.sessionVariables = {
+    DOTNET_ROOT = "${pkgs.dotnet-sdk_10}/share/dotnet";
+  };
 
   programs.ghostty = {
     enable = true;
