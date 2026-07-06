@@ -17,12 +17,13 @@
     package = null; 
     
     settings = {
-        theme = "black-metal";
-        font-family = "Noto Nerd Font";
+        font-family = "Meslo";
         font-size = 14;
         window-decoration = true;
         macos-titlebar-style = "tabs";
         confirm-close-surface = true;
+        command = "/run/current-system/sw/bin/fish --login --interactive"; 
+        shell-integration = "fish";
     };
   };
 }

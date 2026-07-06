@@ -9,6 +9,11 @@
   };
 
   system.primaryUser = user.username;
+  environment.systemPackages = [
+      (pkgs.python3.withPackages (ps: with ps; [
+          pip
+      ]))
+  ];
 
   homebrew = {
     enable = true;

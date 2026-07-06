@@ -1,5 +1,7 @@
 local opt = vim.opt
 
+opt.swapfile = false
+
 -- Line numbers
 opt.number = true          -- Show line numbers
 opt.relativenumber = true  -- Show relative numbers

@@ -15,6 +15,7 @@
     wget
     nerd-fonts.caskaydia-cove
     nerd-fonts.noto
+    nerd-fonts.meslo-lg
     tree-sitter
     nodejs
     watch
@@ -22,6 +23,7 @@
     yazi
     htop
     claude-code
+    nb # note-taking cli
   ];
 
   fonts.fontconfig.enable = true;
@@ -46,6 +48,9 @@
     shellAliases = {
       gs = "git status";
       gd = "git diff";
+      gpull = "git pull --rebase origin";
+      gpush = "git push origin";
+
       se = "sudoedit";
       vim = "nvim";
 
@@ -110,7 +115,7 @@
     themeFile = "Nord";
 
     font = {
-      name = "caskaydia-cove";
+      name = "Meslo";
       size = 12;
     };
 
@@ -152,8 +157,6 @@
 
     # Shell integration (optional, often enabled by default)
     shellIntegration = {
-      enableBashIntegration = true;
-      enableZshIntegration = true;
       enableFishIntegration = true;
     }; 
   };

@@ -139,6 +139,26 @@
             echo "🚀 Shared .NET Development Environment Loaded!"
           '';
         };
+
+        rust-dev = let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in pkgs.mkShell {
+          buildInputs = with pkgs; [
+            cargo
+            rustc
+            clippy
+            rust-analyzer
+          ] ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
+            libiconv
+          ];
+
+          RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
+
+          shellHook = ''
+            export DOTNET_CLI_TELEMETRY_OPTOUT=1
+            echo "🚀 Shared Rust & .NET Development Environment Loaded!"
+          '';
+        };
     });
   };
 }

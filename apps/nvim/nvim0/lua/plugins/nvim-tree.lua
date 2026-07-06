@@ -3,6 +3,7 @@ return {
   version = "*",
   priority = 1000,
   lazy = false,
+  enabled = false,
   dependencies = {
     "nvim-tree/nvim-web-devicons",
   },
