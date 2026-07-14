@@ -55,7 +55,7 @@
       vim = "nvim";
 
       # shells
-      dotnet-env="nix-shell ~/workplace/nix-darwin/shells/dotnet.nix";
+      claude-personal = "CLAUDE_CONFIG_DIR=~/.claude-personal claude";
 
       nix-re =
         if pkgs.stdenv.isDarwin
