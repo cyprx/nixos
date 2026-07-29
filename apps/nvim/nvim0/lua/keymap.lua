@@ -18,10 +18,15 @@ vim.keymap.set('n', ']c', '<cmd>cnext<cr>', { desc = "Next Quickfix Item" })
 keymap("n", "<leader>n", ":lua MiniFiles.open()<CR>", { desc = "Toggle Mini Tree" })
 
 -- Telescope
-vim.keymap.set('n', '<leader>ff', function() require('telescope.builtin').find_files() end, { desc = 'Telescope find files' })
-vim.keymap.set('n', '<leader>fg', function() require('telescope.builtin').live_grep() end, { desc = 'Telescope live grep' })
-vim.keymap.set('n', '<leader>fb', function() require('telescope.builtin').buffers() end, { desc = 'Telescope buffers' })
-vim.keymap.set('n', '<leader>fh', function() require('telescope.builtin').help_tags() end, { desc = 'Telescope help tags' })
+-- vim.keymap.set('n', '<leader>ff', function() require('telescope.builtin').find_files() end, { desc = 'Telescope find files' })
+-- vim.keymap.set('n', '<leader>fg', function() require('telescope.builtin').live_grep() end, { desc = 'Telescope live grep' })
+-- vim.keymap.set('n', '<leader>fb', function() require('telescope.builtin').buffers() end, { desc = 'Telescope buffers' })
+-- vim.keymap.set('n', '<leader>fh', function() require('telescope.builtin').help_tags() end, { desc = 'Telescope help tags' })
+
+-- Fzf Lua
+vim.keymap.set('n', '<leader>ff', ':FzfLua files resume=true<CR>', { desc = 'Fzf find files' })
+vim.keymap.set('n', '<leader>fg', ':FzfLua live_grep resume=true<CR>', { desc = 'fzf live grep' })
+vim.keymap.set('n', '<leader>fb', ':FzfLua buffers resume=true<CR>', { desc = 'fzf buffers' })
 
 -- LSP
 vim.api.nvim_create_autocmd('LspAttach', {

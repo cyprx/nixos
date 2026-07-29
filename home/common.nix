@@ -56,6 +56,7 @@
 
       # shells
       claude-personal = "CLAUDE_CONFIG_DIR=~/.claude-personal claude";
+      claude-work = "CLAUDE_CONFIG_DIR=~/.claude claude";
 
       nix-re =
         if pkgs.stdenv.isDarwin
@@ -129,16 +130,15 @@
       # Window layout
       window_padding_width = 4;
       placement_strategy = "center";
+      draw_minimal_borders = "yes";
+      window_border_width = 1;
+      draw_window_borders_for_single_window = "yes";
       
       hide_window_decorations = "yes";
       
       # Transparency (optional)
       background_opacity = "0.99";
       background_blur = 1;
-
-      # Draw borders when multiple windows are split
-      draw_minimal_borders = "yes";
-      window_border_width = 1;
 
       # Highlight colors for active/inactive windows
       # active_border_color = "#00ff00";
