@@ -26,9 +26,13 @@
       url = "github:cyprx/grass-helix";
       flake = false;
     };
+    alabaster-theme = {
+      url = "github:wolf/alabaster-for-helix";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs, nix-darwin, nixos-wsl, home-manager, niri, helix, darkvoid-theme, grass-theme, ...}@inputs:
+  outputs = { self, nixpkgs, nix-darwin, nixos-wsl, home-manager, niri, helix, darkvoid-theme, grass-theme, alabaster-theme, ...}@inputs:
   let
           forAllSystems = nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-darwin" ];
           identity = import ./identity.nix;
@@ -148,6 +152,8 @@
             rustc
             clippy
             rust-analyzer
+            nodejs_22
+            deno
           ] ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
             libiconv
           ];

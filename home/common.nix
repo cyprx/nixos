@@ -164,11 +164,10 @@
   programs.jq.enable = true;
 
   # Editors
-  # programs.helix.package = inputs.helix.packages.${pkgs.system}.default;
   programs.helix = {
     enable = true;
     settings = {
-      theme = "darkvoid";
+      theme = "wolf-alabaster-dark-bg";
       editor = {
         line-number = "absolute";
         cursorline = true;
@@ -179,6 +178,9 @@
           select = "underline";
         };
         lsp.display-messages = true;
+        continue-comments = false;
+      };
+      keys.normal = {
       };
     };
 
@@ -200,9 +202,17 @@
           name = "go";
           auto-format = true;
         }
+        {
+          name = "rust";
+          auto-format = true;
+        }
       ];
     };
   };
+  xdg.configFile."helix/themes/wolf-alabaster-dark.toml".source = "${inputs.alabaster-theme}/helix/dot-config/helix/themes/wolf-alabaster-dark.toml";
+  xdg.configFile."helix/themes/wolf-alabaster-dark-bg.toml".source = "${inputs.alabaster-theme}/helix/dot-config/helix/themes/wolf-alabaster-dark-bg.toml";
+  xdg.configFile."helix/themes/wolf-alabaster-light.toml".source = "${inputs.alabaster-theme}/helix/dot-config/helix/themes/wolf-alabaster-light.toml";
+  xdg.configFile."helix/themes/wolf-alabaster-light-bg.toml".source = "${inputs.alabaster-theme}/helix/dot-config/helix/themes/wolf-alabaster-light-bg.toml";
   xdg.configFile."helix/themes/darkvoid.toml".source = "${inputs.darkvoid-theme}/darkvoid.toml";
 
   programs.gh = {
