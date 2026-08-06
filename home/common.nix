@@ -24,6 +24,8 @@
     htop
     claude-code
     nb # note-taking cli
+    markdown-oxide
+    prettier
   ];
 
   fonts.fontconfig.enable = true;
@@ -179,6 +181,10 @@
         };
         lsp.display-messages = true;
         continue-comments = false;
+        soft-wrap = {
+          enable = true;
+          wrap-indicator = "";
+        };
       };
       keys.normal = {
       };
@@ -205,6 +211,14 @@
         {
           name = "rust";
           auto-format = true;
+        }
+        {
+          name = "markdown";
+          auto-format = true;
+          formatter = {
+            command = "prettier";
+            args = [ "--parser" "markdown" "--prose-wrap" "never"];
+          };
         }
       ];
     };
