@@ -17,8 +17,10 @@
 
   homebrew = {
     enable = true;
+    enableFishIntegration = true;
     onActivation = {
       autoUpdate = true;
+      upgrade = true;
       cleanup = "zap"; # Removes unlisted casks/formulae
       extraFlags = [ "--force" ]; 
     };
