@@ -117,9 +117,8 @@
         in pkgs.mkShell {
           buildInputs = with pkgs; [
             nodejs_22
-            nodePackages.npm
-            nodePackages.pnpm
-            nodePackages.typescript-language-server
+            pnpm
+            typescript-language-server
           ];
 
           shellHook = ''

@@ -187,6 +187,13 @@
         };
       };
       keys.normal = {
+        "C-y" = [
+          ":write-all"
+          ":sh rm -f /tmp/yazi-hx-file"
+          ":insert-output yazi \"%{buffer_name}\" --chooser-file=/tmp/yazi-hx-file"
+          ":open %sh{cat /tmp/yazi-hx-file}"
+          ":redraw"
+        ];
       };
     };
 

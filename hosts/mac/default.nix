@@ -34,6 +34,7 @@
       "ghostty"
       "dbeaver-community"
       "visual-studio-code"
+      "codex"
     ];
   };
 

@@ -11,7 +11,7 @@
 
   home.packages = with pkgs; [
     xwayland-satellite
-    neofetch
+    fastfetch
     htop
     tmux
     kitty
@@ -303,11 +303,7 @@
           insteadOf = "https://github.com/";
         };
       };
-    };
-    config = {
-      safe = {
-      	directory = "/etc/nixos";
-      };
+      safe.directory = [ "/etc/nixos" ];
     };
   };
   

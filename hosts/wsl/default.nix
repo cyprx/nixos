@@ -20,6 +20,7 @@
   wsl.ssh-agent.enable = true;
   networking.hostName = "cywsl";
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nixpkgs.config.allowUnfree = true;
 
   virtualisation.docker.enable = true;
 
