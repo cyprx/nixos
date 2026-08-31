@@ -14,6 +14,7 @@
     zoxide
     wget
     nerd-fonts.caskaydia-cove
+    nerd-fonts.envy-code-r
     nerd-fonts.noto
     nerd-fonts.meslo-lg
     tree-sitter
@@ -26,6 +27,7 @@
     nb # note-taking cli
     markdown-oxide
     prettier
+    k9s
   ];
 
   fonts.fontconfig.enable = true;
@@ -118,7 +120,7 @@
     themeFile = "Nord";
 
     font = {
-      name = "Meslo";
+      name = "EnvyCodeR Nerd Font Mono";
       size = 12;
     };
 
@@ -221,7 +223,7 @@
         }
         {
           name = "markdown";
-          auto-format = true;
+          auto-format = false;
           formatter = {
             command = "prettier";
             args = [ "--parser" "markdown" "--prose-wrap" "never"];

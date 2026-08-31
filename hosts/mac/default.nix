@@ -20,7 +20,7 @@
     enableFishIntegration = true;
     onActivation = {
       autoUpdate = true;
-      upgrade = true;
+      upgrade = false;
       cleanup = "zap"; # Removes unlisted casks/formulae
       extraFlags = [ "--force" ]; 
     };

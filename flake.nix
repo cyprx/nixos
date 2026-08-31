@@ -153,6 +153,7 @@
             rust-analyzer
             nodejs_22
             deno
+            rustfmt
           ] ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
             libiconv
           ];
