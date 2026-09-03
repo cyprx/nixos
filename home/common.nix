@@ -28,6 +28,7 @@
     markdown-oxide
     prettier
     k9s
+    zellij
   ];
 
   fonts.fontconfig.enable = true;
@@ -74,6 +75,18 @@
       { name = "fzf-fish"; src = pkgs.fishPlugins.fzf-fish.src; }
       { name = "grc"; src = pkgs.fishPlugins.grc.src; }
     ];
+  };
+
+  programs.zellij = {
+    enable = true;
+    enableFishIntegration = true;
+
+    settings = {
+      default_shell = "${pkgs.fish}/bin/fish";
+      default_layout = "compact";
+      simplified_ui = true;
+      theme = "nord";
+    };
   };
 
   programs.zoxide = {
