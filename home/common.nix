@@ -1,5 +1,15 @@
 { config, pkgs, inputs, user, ... }:
 
+let
+  # Browse files with Yazi and open the chosen one.
+  yaziFilePicker = [
+    ":write-all"
+    ":sh rm -f /tmp/yazi-hx-file"
+    ":insert-output yazi \"%{buffer_name}\" --chooser-file=/tmp/yazi-hx-file"
+    ":open %sh{cat /tmp/yazi-hx-file}"
+    ":redraw"
+  ];
+in
 {
   imports = [
     ../apps/nvim/nvim.nix
@@ -15,6 +25,7 @@
     wget
     nerd-fonts.caskaydia-cove
     nerd-fonts.envy-code-r
+    nerd-fonts.iosevka
     nerd-fonts.noto
     nerd-fonts.meslo-lg
     tree-sitter
@@ -28,7 +39,7 @@
     markdown-oxide
     prettier
     k9s
-    zellij
+    awscli2
   ];
 
   fonts.fontconfig.enable = true;
@@ -50,6 +61,11 @@
 
   programs.fish = {
     enable = true;
+    interactiveShellInit = ''
+      if test "$TERM" != "dumb"; and not set -q TMUX
+        ${pkgs.tmux}/bin/tmux new-session
+      end
+    '';
     shellAliases = {
       gs = "git status";
       gd = "git diff";
@@ -77,16 +93,10 @@
     ];
   };
 
-  programs.zellij = {
+  programs.tmux = {
     enable = true;
-    enableFishIntegration = true;
-
-    settings = {
-      default_shell = "${pkgs.fish}/bin/fish";
-      default_layout = "compact";
-      simplified_ui = true;
-      theme = "nord";
-    };
+    shell = "${pkgs.fish}/bin/fish";
+    mouse = true;
   };
 
   programs.zoxide = {
@@ -133,7 +143,7 @@
     themeFile = "Nord";
 
     font = {
-      name = "EnvyCodeR Nerd Font Mono";
+      name = "Envy Code R";
       size = 12;
     };
 
@@ -202,13 +212,9 @@
         };
       };
       keys.normal = {
-        "C-y" = [
-          ":write-all"
-          ":sh rm -f /tmp/yazi-hx-file"
-          ":insert-output yazi \"%{buffer_name}\" --chooser-file=/tmp/yazi-hx-file"
-          ":open %sh{cat /tmp/yazi-hx-file}"
-          ":redraw"
-        ];
+        "C-y" = yaziFilePicker;
+        # Mirrors Neovim's <leader>n file tree.
+        space.n = yaziFilePicker;
       };
     };
 
@@ -247,6 +253,14 @@
   };
   xdg.configFile."helix/themes/wolf-alabaster-dark.toml".source = "${inputs.alabaster-theme}/helix/dot-config/helix/themes/wolf-alabaster-dark.toml";
   xdg.configFile."helix/themes/wolf-alabaster-dark-bg.toml".source = "${inputs.alabaster-theme}/helix/dot-config/helix/themes/wolf-alabaster-dark-bg.toml";
+  xdg.configFile."helix/themes/wolf-alabaster-dark-bg-test.toml".text = ''
+    inherits = "wolf-alabaster-dark-bg"
+
+    [palette]
+    definition-bg = "#294A66"
+    selection-primary = "#315A7D"
+    error-red = "#E06C75"
+  '';
   xdg.configFile."helix/themes/wolf-alabaster-light.toml".source = "${inputs.alabaster-theme}/helix/dot-config/helix/themes/wolf-alabaster-light.toml";
   xdg.configFile."helix/themes/wolf-alabaster-light-bg.toml".source = "${inputs.alabaster-theme}/helix/dot-config/helix/themes/wolf-alabaster-light-bg.toml";
   xdg.configFile."helix/themes/darkvoid.toml".source = "${inputs.darkvoid-theme}/darkvoid.toml";

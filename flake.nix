@@ -154,6 +154,7 @@
             nodejs_22
             deno
             rustfmt
+            typescript-language-server
           ] ++ pkgs.lib.optionals pkgs.stdenv.isDarwin [
             libiconv
           ];
