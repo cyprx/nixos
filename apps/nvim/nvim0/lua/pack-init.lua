@@ -20,6 +20,7 @@ vim.api.nvim_create_autocmd("PackChanged", {
 vim.pack.add({
   { src = "https://github.com/nvim-lua/plenary.nvim" },
   { src = "https://github.com/nvim-tree/nvim-web-devicons" },
+  { src = "https://github.com/folke/which-key.nvim", version = vim.version.range("3.*") },
   { src = "https://github.com/rafamadriz/friendly-snippets" },
   { src = "https://github.com/ibhagwan/fzf-lua" },
   { src = "https://github.com/stevearc/oil.nvim" },
@@ -43,6 +44,17 @@ vim.pack.add({
 }, { confirm = false })
 
 vim.cmd.colorscheme("grass")
+require("which-key").setup({
+  preset = "helix",
+  delay = 300,
+  notify = false,
+  spec = {
+    { "<leader>q", group = "Diagnostics / quickfix" },
+    { "<leader>r", group = "Rename" },
+    { "<leader>c", group = "Code actions", mode = { "n", "v" } },
+    { "<leader>w", group = "Windows", proxy = "<C-w>" },
+  },
+})
 require("blame").setup({})
 require("mini.align").setup({})
 require("mini.files").setup({})

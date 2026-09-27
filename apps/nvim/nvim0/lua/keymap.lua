@@ -31,6 +31,23 @@ keymap("n", "gn", "<cmd>bnext<CR>", { desc = "Goto next buffer" })
 keymap("n", "gp", "<cmd>bprevious<CR>", { desc = "Goto previous buffer" })
 
 -- Space mode (Helix `space`) -------------------------------------------------
+keymap("n", "<leader>e", function()
+  local cwd = vim.fn.getcwd()
+  local root = vim.fs.root(cwd, { ".git", ".helix" }) or cwd
+  require("mini.files").open(root, false)
+end, { desc = "File explorer at project root" })
+keymap("n", "<leader>E", function()
+  local path = vim.api.nvim_buf_get_name(0)
+  local directory = vim.fn.getcwd()
+  if vim.bo.buftype == "" and path ~= "" then
+    local parent = vim.fs.dirname(path)
+    if vim.fn.isdirectory(parent) == 1 then
+      directory = parent
+    end
+  end
+  require("mini.files").open(directory, false)
+end, { desc = "File explorer at buffer directory" })
+keymap("n", "<leader>qe", vim.diagnostic.open_float, { desc = "Show diagnostic details" })
 keymap("n", "<leader>f", ":FzfLua files resume=true<CR>", { desc = "File picker" })
 keymap("n", "<leader>F", function()
   require("fzf-lua").files({ cwd = vim.fn.expand("%:p:h") })
@@ -72,7 +89,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
 
     -- Diagnostics
-    vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
     vim.keymap.set('n', '[d', function() vim.diagnostic.jump({ count = -1 }) end)
     vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ count = 1 }) end)
     vim.keymap.set('n', '[D', function() vim.diagnostic.jump({ count = -math.huge }) end)
