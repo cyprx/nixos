@@ -40,6 +40,7 @@ in
     prettier
     k9s
     awscli2
+    saml2aws
   ];
 
   fonts.fontconfig.enable = true;
